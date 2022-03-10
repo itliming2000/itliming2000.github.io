@@ -6,7 +6,7 @@
   <link href="http://itliming2000.github.io/atom.xml" rel="self"/>
   
   <link href="http://itliming2000.github.io/"/>
-  <updated>2022-03-07T04:16:38.025Z</updated>
+  <updated>2022-03-10T09:46:12.906Z</updated>
   <id>http://itliming2000.github.io/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>【Hexo】部署博客到Github失败的解决方案</title>
+    <link href="http://itliming2000.github.io/2022/03/10/%E3%80%90Hexo%E3%80%91%E9%83%A8%E7%BD%B2%E5%8D%9A%E5%AE%A2%E5%88%B0Github%E5%A4%B1%E8%B4%A5%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/"/>
+    <id>http://itliming2000.github.io/2022/03/10/%E3%80%90Hexo%E3%80%91%E9%83%A8%E7%BD%B2%E5%8D%9A%E5%AE%A2%E5%88%B0Github%E5%A4%B1%E8%B4%A5%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</id>
+    <published>2022-03-10T09:40:35.000Z</published>
+    <updated>2022-03-10T09:46:12.906Z</updated>
+    
+    <content type="html"><![CDATA[<p>Hexo部署博客到Github项目上出现失败的解决方案。主要错误提示如下：<br><strong>fatal: could not read Username for ‘<a href="https://github.com&/#39;">https://github.com&#39;</a>: No error</strong></p><p><strong>fatal{err: Error : Spawn failed ……}</strong></p><span id="more"></span><h1 id="一、错误说明"><a href="#一、错误说明" class="headerlink" title="一、错误说明"></a>一、错误说明</h1><p>在上传Hexo博客到搭建到 Github 的项目时，已经使用 <code>hexo s</code> 预览成功了，但在 <code>hexo d</code> 部署到个人博客的时候出现了以下问题：<br><strong>fatal: could not read Username for ‘<a href="https://github.com&/#39;">https://github.com&#39;</a>: No error</strong><br><img src="https://img-blog.csdnimg.cn/7e91a08d6a8d42b7bb5e9bcdccf416f7.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA56a75piOemg=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="请添加图片描述"></p><h1 id="二、修改配置"><a href="#二、修改配置" class="headerlink" title="二、修改配置"></a>二、修改配置</h1><p>按照提示，先查看自己的博客配置文件 <code>_config.yml</code> ，在文件最底处修改内容如下：</p><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span> </span><br><span class="line"><span class="attr">type:</span> <span class="string">git</span></span><br><span class="line"><span class="attr">repo:</span> <span class="string">git@github.com:yourname/yourname.github.io.git</span>   <span class="comment"># yourname，自己Github用户名</span></span><br><span class="line"><span class="attr">branch:</span> <span class="string">master</span><span class="comment"># 设置分支管理</span></span><br></pre></td></tr></table></figure><p>修改完毕后，再次部署，若仍报错，但与之前不同，如下：<br><strong>fatal{err: Error : Spawn failed ……}</strong><br><img src="https://img-blog.csdnimg.cn/b9600a493a79416e956602bc038af352.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA56a75piOemg=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="请添加图片描述"><br>则说明，Github公钥出现错误，重新添加公钥即可。</p><h1 id="三、添加公钥"><a href="#三、添加公钥" class="headerlink" title="三、添加公钥"></a>三、添加公钥</h1><h2 id="3-1-测试连接"><a href="#3-1-测试连接" class="headerlink" title="3.1 测试连接"></a>3.1 测试连接</h2><p>在博客目录，打开 <code>Git Bash Here</code> 输入以下代码</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure><p>如下图结果，<strong>Permission denied(publickey)</strong> ，证明确实缺少公钥。<br><img src="https://img-blog.csdnimg.cn/deef83abafec447f83ca4b0611f93dc0.png" alt="请添加图片描述"></p><h2 id="3-2-添加公钥"><a href="#3-2-添加公钥" class="headerlink" title="3.2 添加公钥"></a>3.2 添加公钥</h2><p>首先在本地创建 <code>SSH Keys</code> ：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &quot;yourmail&quot;   # 后面为Github注册邮箱</span><br></pre></td></tr></table></figure><p>注意在 <strong>Overwrite(y&#x2F;n)?</strong> 后添加 <strong>y</strong> 后回车，其它一直回车，生成 <code>SSH Keys</code><br><img src="https://img-blog.csdnimg.cn/a3ec19be2cf44025bfc2a7a77d1a9262.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA56a75piOemg=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="请添加图片描述"></p><p>根据上图找到路径 <code>xxx/.ssh/id_rsa.pub</code> ，打开文件，复制全部文本<br><img src="https://img-blog.csdnimg.cn/6c59eb8d746546608eb1c965894af3cf.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA56a75piOemg=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="请添加图片描述"></p><p>进入自己的Github，找到SSH&#x2F;Add new，输入SSH Keys，将复制来的内容粘贴在 <code>Key</code> 中<br><img src="https://img-blog.csdnimg.cn/9ec021c94d184767837d3c330fe1a5ea.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA56a75piOemg=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="请添加图片描述"><br>保存！<br><img src="https://img-blog.csdnimg.cn/62f9ef69423e456db7c1afd28086bd0f.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA56a75piOemg=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="请添加图片描述"></p><h2 id="3-3-重新部署"><a href="#3-3-重新部署" class="headerlink" title="3.3 重新部署"></a>3.3 重新部署</h2><p>先测试SSH连接：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure><p><img src="https://img-blog.csdnimg.cn/e4180831347842ef8d1dbecceb49c259.png" alt="请添加图片描述"></p><p>成功连接！重新部署项目</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo d</span><br></pre></td></tr></table></figure><p><img src="https://img-blog.csdnimg.cn/69336c9d9e964dff86ca7f58ee15d3da.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA56a75piOemg=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="请添加图片描述"></p><p>部署成功！<br><strong>以上问题完美解决！</strong></p><p>CSDN同步参考链接：<br><a href="https://blog.csdn.net/weixin_48927364/article/details/123405585">https://blog.csdn.net/weixin_48927364/article/details/123405585</a></p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;Hexo部署博客到Github项目上出现失败的解决方案。主要错误提示如下：&lt;br&gt;&lt;strong&gt;fatal: could not read Username for ‘&lt;a href=&quot;https://github.com&amp;/#39;&quot;&gt;https://github.com&amp;#39;&lt;/a&gt;: No error&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;fatal{err: Error : Spawn failed ……}&lt;/strong&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Hexo" scheme="http://itliming2000.github.io/categories/Hexo/"/>
+    
+    
+    <category term="Github" scheme="http://itliming2000.github.io/tags/Github/"/>
+    
+  </entry>
   
   <entry>
     <title>【Hexo】nexT主题使用攻略基础——添加评论功能</title>
