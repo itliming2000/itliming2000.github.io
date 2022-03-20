@@ -46,30 +46,28 @@
     var CONFIG = {"hostname":"itliming2000.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="Hexo部署博客到Github项目上出现失败的解决方案。主要错误提示如下：fatal: could not read Username for ‘https:&#x2F;&#x2F;github.com&#39;: No error fatal{err: Error : Spawn failed ……}">
+  <meta name="description" content="Anaconda的JupyterLab 作为优秀的网页编辑器，非常适用于编写Python程序，但往往可能因一些原因如JupyterLab报错：Server Connection Error，而无法正常连接服务器，为此我整理了以下方法，以解决该问题。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="【Hexo】部署博客到Github失败的解决方案">
-<meta property="og:url" content="http://itliming2000.github.io/2022/03/10/%E3%80%90Hexo%E3%80%91%E9%83%A8%E7%BD%B2%E5%8D%9A%E5%AE%A2%E5%88%B0Github%E5%A4%B1%E8%B4%A5%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/index.html">
+<meta property="og:title" content="【Python】JupyterLab报错：Server Connection Error如何解决？">
+<meta property="og:url" content="http://itliming2000.github.io/2022/03/20/%E3%80%90Python%E3%80%91JupyterLab%E6%8A%A5%E9%94%99%EF%BC%9AServer%20Connection%20Error%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%EF%BC%9F/index.html">
 <meta property="og:site_name" content="离明的世界">
-<meta property="og:description" content="Hexo部署博客到Github项目上出现失败的解决方案。主要错误提示如下：fatal: could not read Username for ‘https:&#x2F;&#x2F;github.com&#39;: No error fatal{err: Error : Spawn failed ……}">
+<meta property="og:description" content="Anaconda的JupyterLab 作为优秀的网页编辑器，非常适用于编写Python程序，但往往可能因一些原因如JupyterLab报错：Server Connection Error，而无法正常连接服务器，为此我整理了以下方法，以解决该问题。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/7e91a08d6a8d42b7bb5e9bcdccf416f7.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA56a75piOemg=,size_20,color_FFFFFF,t_70,g_se,x_16">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/b9600a493a79416e956602bc038af352.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA56a75piOemg=,size_20,color_FFFFFF,t_70,g_se,x_16">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/deef83abafec447f83ca4b0611f93dc0.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/a3ec19be2cf44025bfc2a7a77d1a9262.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA56a75piOemg=,size_20,color_FFFFFF,t_70,g_se,x_16">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/6c59eb8d746546608eb1c965894af3cf.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA56a75piOemg=,size_20,color_FFFFFF,t_70,g_se,x_16">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/9ec021c94d184767837d3c330fe1a5ea.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA56a75piOemg=,size_20,color_FFFFFF,t_70,g_se,x_16">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/62f9ef69423e456db7c1afd28086bd0f.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA56a75piOemg=,size_20,color_FFFFFF,t_70,g_se,x_16">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/e4180831347842ef8d1dbecceb49c259.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/69336c9d9e964dff86ca7f58ee15d3da.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA56a75piOemg=,size_20,color_FFFFFF,t_70,g_se,x_16">
-<meta property="article:published_time" content="2022-03-10T09:40:35.000Z">
-<meta property="article:modified_time" content="2022-03-10T09:46:12.906Z">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/506b96bc70ef4ef2bcad698e96b9141a.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA56a75piOemg=,size_20,color_FFFFFF,t_70,g_se,x_16">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/43cc1ce2290a483fa8ae1047aec247da.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA56a75piOemg=,size_20,color_FFFFFF,t_70,g_se,x_16">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/6e24846a3eec47e9a2c755015f465bde.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/c5610a81eaac44e59bc78b1c079d9379.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA56a75piOemg=,size_20,color_FFFFFF,t_70,g_se,x_16">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/847440a4eed94423bbb200dbd6d9242b.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA56a75piOemg=,size_20,color_FFFFFF,t_70,g_se,x_16">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/e019b113f5ab44818f17e8a887e9f1ef.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA56a75piOemg=,size_20,color_FFFFFF,t_70,g_se,x_16">
+<meta property="article:published_time" content="2022-03-20T11:50:45.000Z">
+<meta property="article:modified_time" content="2022-03-20T12:02:01.563Z">
 <meta property="article:author" content="离明">
-<meta property="article:tag" content="Github">
+<meta property="article:tag" content="Anaconda">
+<meta property="article:tag" content="Jupyter">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://img-blog.csdnimg.cn/7e91a08d6a8d42b7bb5e9bcdccf416f7.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA56a75piOemg=,size_20,color_FFFFFF,t_70,g_se,x_16">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/506b96bc70ef4ef2bcad698e96b9141a.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA56a75piOemg=,size_20,color_FFFFFF,t_70,g_se,x_16">
 
-<link rel="canonical" href="http://itliming2000.github.io/2022/03/10/%E3%80%90Hexo%E3%80%91%E9%83%A8%E7%BD%B2%E5%8D%9A%E5%AE%A2%E5%88%B0Github%E5%A4%B1%E8%B4%A5%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">
+<link rel="canonical" href="http://itliming2000.github.io/2022/03/20/%E3%80%90Python%E3%80%91JupyterLab%E6%8A%A5%E9%94%99%EF%BC%9AServer%20Connection%20Error%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%EF%BC%9F/">
 
 
 <script id="page-configurations">
@@ -82,7 +80,7 @@
   };
 </script>
 
-  <title>【Hexo】部署博客到Github失败的解决方案 | 离明的世界</title>
+  <title>【Python】JupyterLab报错：Server Connection Error如何解决？ | 离明的世界</title>
   
 
 
@@ -206,7 +204,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://itliming2000.github.io/2022/03/10/%E3%80%90Hexo%E3%80%91%E9%83%A8%E7%BD%B2%E5%8D%9A%E5%AE%A2%E5%88%B0Github%E5%A4%B1%E8%B4%A5%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">
+    <link itemprop="mainEntityOfPage" href="http://itliming2000.github.io/2022/03/20/%E3%80%90Python%E3%80%91JupyterLab%E6%8A%A5%E9%94%99%EF%BC%9AServer%20Connection%20Error%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%EF%BC%9F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -219,7 +217,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          【Hexo】部署博客到Github失败的解决方案
+          【Python】JupyterLab报错：Server Connection Error如何解决？
         </h1>
 
         <div class="post-meta">
@@ -230,7 +228,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2022-03-10 17:40:35 / 修改时间：17:46:12" itemprop="dateCreated datePublished" datetime="2022-03-10T17:40:35+08:00">2022-03-10</time>
+              <time title="创建时间：2022-03-20 19:50:45 / 修改时间：20:02:01" itemprop="dateCreated datePublished" datetime="2022-03-20T19:50:45+08:00">2022-03-20</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -238,7 +236,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Hexo/" itemprop="url" rel="index"><span itemprop="name">Hexo</span></a>
+                  <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
                 </span>
             </span>
 
@@ -251,8 +249,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2022/03/10/%E3%80%90Hexo%E3%80%91%E9%83%A8%E7%BD%B2%E5%8D%9A%E5%AE%A2%E5%88%B0Github%E5%A4%B1%E8%B4%A5%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2022/03/10/%E3%80%90Hexo%E3%80%91%E9%83%A8%E7%BD%B2%E5%8D%9A%E5%AE%A2%E5%88%B0Github%E5%A4%B1%E8%B4%A5%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" itemprop="commentCount"></span>
+    <a title="valine" href="/2022/03/20/%E3%80%90Python%E3%80%91JupyterLab%E6%8A%A5%E9%94%99%EF%BC%9AServer%20Connection%20Error%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%EF%BC%9F/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2022/03/20/%E3%80%90Python%E3%80%91JupyterLab%E6%8A%A5%E9%94%99%EF%BC%9AServer%20Connection%20Error%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%EF%BC%9F/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -262,7 +260,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>959</span>
+              <span>1.4k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -280,31 +278,35 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>Hexo部署博客到Github项目上出现失败的解决方案。主要错误提示如下：<br><strong>fatal: could not read Username for ‘<a target="_blank" rel="noopener" href="https://github.com&/#39;">https://github.com&#39;</a>: No error</strong></p>
-<p><strong>fatal{err: Error : Spawn failed ……}</strong></p>
-<span id="more"></span>
-
-<h1 id="一、错误说明"><a href="#一、错误说明" class="headerlink" title="一、错误说明"></a>一、错误说明</h1><p>在上传Hexo博客到搭建到 Github 的项目时，已经使用 <code>hexo s</code> 预览成功了，但在 <code>hexo d</code> 部署到个人博客的时候出现了以下问题：<br><strong>fatal: could not read Username for ‘<a target="_blank" rel="noopener" href="https://github.com&/#39;">https://github.com&#39;</a>: No error</strong><br><img src="https://img-blog.csdnimg.cn/7e91a08d6a8d42b7bb5e9bcdccf416f7.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA56a75piOemg=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="请添加图片描述"></p>
-<h1 id="二、修改配置"><a href="#二、修改配置" class="headerlink" title="二、修改配置"></a>二、修改配置</h1><p>按照提示，先查看自己的博客配置文件 <code>_config.yml</code> ，在文件最底处修改内容如下：</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span> </span><br><span class="line">	<span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">	<span class="attr">repo:</span> <span class="string">git@github.com:yourname/yourname.github.io.git</span>   <span class="comment"># yourname，自己Github用户名</span></span><br><span class="line">	<span class="attr">branch:</span> <span class="string">master</span>		<span class="comment"># 设置分支管理</span></span><br></pre></td></tr></table></figure>
-<p>修改完毕后，再次部署，若仍报错，但与之前不同，如下：<br><strong>fatal{err: Error : Spawn failed ……}</strong><br><img src="https://img-blog.csdnimg.cn/b9600a493a79416e956602bc038af352.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA56a75piOemg=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="请添加图片描述"><br>则说明，Github公钥出现错误，重新添加公钥即可。</p>
-<h1 id="三、添加公钥"><a href="#三、添加公钥" class="headerlink" title="三、添加公钥"></a>三、添加公钥</h1><h2 id="3-1-测试连接"><a href="#3-1-测试连接" class="headerlink" title="3.1 测试连接"></a>3.1 测试连接</h2><p>在博客目录，打开 <code>Git Bash Here</code> 输入以下代码</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure>
-<p>如下图结果，<strong>Permission denied(publickey)</strong> ，证明确实缺少公钥。<br><img src="https://img-blog.csdnimg.cn/deef83abafec447f83ca4b0611f93dc0.png" alt="请添加图片描述"></p>
-<h2 id="3-2-添加公钥"><a href="#3-2-添加公钥" class="headerlink" title="3.2 添加公钥"></a>3.2 添加公钥</h2><p>首先在本地创建 <code>SSH Keys</code> ：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &quot;yourmail&quot;   # 后面为Github注册邮箱</span><br></pre></td></tr></table></figure>
-<p>注意在 <strong>Overwrite(y&#x2F;n)?</strong> 后添加 <strong>y</strong> 后回车，其它一直回车，生成 <code>SSH Keys</code><br><img src="https://img-blog.csdnimg.cn/a3ec19be2cf44025bfc2a7a77d1a9262.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA56a75piOemg=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="请添加图片描述"></p>
-<p>根据上图找到路径 <code>xxx/.ssh/id_rsa.pub</code> ，打开文件，复制全部文本<br><img src="https://img-blog.csdnimg.cn/6c59eb8d746546608eb1c965894af3cf.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA56a75piOemg=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="请添加图片描述"></p>
-<p>进入自己的Github，找到SSH&#x2F;Add new，输入SSH Keys，将复制来的内容粘贴在 <code>Key</code> 中<br><img src="https://img-blog.csdnimg.cn/9ec021c94d184767837d3c330fe1a5ea.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA56a75piOemg=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="请添加图片描述"><br>保存！<br><img src="https://img-blog.csdnimg.cn/62f9ef69423e456db7c1afd28086bd0f.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA56a75piOemg=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="请添加图片描述"></p>
-<h2 id="3-3-重新部署"><a href="#3-3-重新部署" class="headerlink" title="3.3 重新部署"></a>3.3 重新部署</h2><p>先测试SSH连接：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure>
-<p><img src="https://img-blog.csdnimg.cn/e4180831347842ef8d1dbecceb49c259.png" alt="请添加图片描述"></p>
-<p>成功连接！重新部署项目</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo d</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://img-blog.csdnimg.cn/69336c9d9e964dff86ca7f58ee15d3da.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA56a75piOemg=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="请添加图片描述"></p>
-<p>部署成功！<br><strong>以上问题完美解决！</strong></p>
-<p>CSDN同步参考链接：<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_48927364/article/details/123405585">https://blog.csdn.net/weixin_48927364/article/details/123405585</a></p>
+        <p>Anaconda的JupyterLab 作为优秀的网页编辑器，非常适用于编写Python程序，但往往可能因一些原因如<strong>JupyterLab报错：Server Connection Error</strong>，而无法正常连接服务器，为此我整理了以下方法，以解决该问题。<span id="more"></span></p>
+<h1 id="一、报错情形"><a href="#一、报错情形" class="headerlink" title="一、报错情形"></a>一、报错情形</h1><p><strong>JupyterLab报错：</strong><br><strong>Server Connection Error</strong>: A connection to the jupyter server could not be established. Jupyterlab will continue trying to reconnect. Check your network connection or jupyter server.</p>
+<p>服务器连接错误:jupyter服务器无法建立连接。木星实验室将继续尝试重新连接。检查您的网络连接或jupyter服务器。</p>
+<p>在此情况下，无法使用Python，无法进行编译，时常弹出错误，无法连接！</p>
+<h1 id="二、深层原因"><a href="#二、深层原因" class="headerlink" title="二、深层原因"></a>二、深层原因</h1><p>使用微软账号登陆windows后，<strong>用户名称中存在中文名</strong>，导致jupyter路径中含有中文，无法识别路径。</p>
+<h1 id="三、解决方案"><a href="#三、解决方案" class="headerlink" title="三、解决方案"></a>三、解决方案</h1><p><strong>解决办法：</strong><br>（以Win10为例） <strong>将用户名修改为英文</strong>，问题解决！</p>
+<p><strong>以下介绍修改用户名的方式：</strong></p>
+<h2 id="3-1-重命名用户名"><a href="#3-1-重命名用户名" class="headerlink" title="3.1 重命名用户名"></a>3.1 重命名用户名</h2><p>右键【计算机】-&gt;【管理】-&gt;【本地用户和组】-&gt;【用户】-&gt;右键【中文用户名】-&gt;【重命名】<br><img src="https://img-blog.csdnimg.cn/506b96bc70ef4ef2bcad698e96b9141a.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA56a75piOemg=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="请添加图片描述"><br><img src="https://img-blog.csdnimg.cn/43cc1ce2290a483fa8ae1047aec247da.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA56a75piOemg=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="请添加图片描述"></p>
+<h2 id="3-2-启用Administrator账户"><a href="#3-2-启用Administrator账户" class="headerlink" title="3.2 启用Administrator账户"></a>3.2 启用Administrator账户</h2><p>Win10默认将Administrator账户禁用，在此需要启用Administrator账户，方法如下：<br>在上步继续，右键【Administrator】-&gt;【属性】-&gt;取消勾选【账户已禁用】</p>
+<h2 id="3-3-切换Administrator账户"><a href="#3-3-切换Administrator账户" class="headerlink" title="3.3 切换Administrator账户"></a>3.3 切换Administrator账户</h2><ol>
+<li><strong>注销</strong>当前账户：<code>【Windows+X】</code>-【注销】</li>
+<li><strong>重启</strong>电脑</li>
+<li><strong>切换</strong>到Administrator账户登录</li>
+</ol>
+<h2 id="3-4-重命名用户文件夹"><a href="#3-4-重命名用户文件夹" class="headerlink" title="3.4 重命名用户文件夹"></a>3.4 重命名用户文件夹</h2><p>进入<strong>C:\用户\xxx</strong>，找到以中文用户名命名的文件夹，重命名为英文，不建议使用空格</p>
+<h2 id="3-5-修改注册表"><a href="#3-5-修改注册表" class="headerlink" title="3.5 修改注册表"></a>3.5 修改注册表</h2><ol>
+<li>打开Windows注册表管理器：<code>【Windows+R】</code>-&gt;【运行】-&gt;输入<strong>regedit</strong></li>
+<li>依次展开HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Profilelist，<strong>在Profilelist下的文件夹对应系统中用户</strong>，而文件夹中<strong>ProfileImagePath值是指向每个用户文件夹的地址</strong>，<strong>一个个点击查看</strong>，找到中文名用户的对应所在的ProfileImagePath值</li>
+<li>修改ProfileImagePath的值，<strong>将地址改为修改成英文的文件夹名</strong>，要与C盘的文件夹名一致</li>
+<li>再次注销，完成登录用户文件夹名更改</li>
+<li>重新登录，以修改后用户名后的账户<br><img src="https://img-blog.csdnimg.cn/6e24846a3eec47e9a2c755015f465bde.png" alt="请添加图片描述"></li>
+</ol>
+<h2 id="3-6-修改环境变量"><a href="#3-6-修改环境变量" class="headerlink" title="3.6 修改环境变量"></a>3.6 修改环境变量</h2><ol>
+<li>打开【控制面板】-【系统和安全】-【系统】-【高级系统设置】-【环境变量】<br><img src="https://img-blog.csdnimg.cn/c5610a81eaac44e59bc78b1c079d9379.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA56a75piOemg=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="请添加图片描述"></li>
+<li>将用户变量和系统变量中，所有含原用户名的字符修改为当前用户名<br><img src="https://img-blog.csdnimg.cn/847440a4eed94423bbb200dbd6d9242b.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA56a75piOemg=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="请添加图片描述"></li>
+<li>打开Anaconda的JupyterLab，配置Python，连接成功，可以正常编辑解释代码，问题已解决！<br><img src="https://img-blog.csdnimg.cn/e019b113f5ab44818f17e8a887e9f1ef.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA56a75piOemg=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="请添加图片描述"></li>
+</ol>
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p><strong>在创建Windows用户或新建文件夹时，习惯使用英文命名，将避免很多不必要的麻烦！</strong></p>
+<p>CSDN同步参考链接：<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_48927364/article/details/123604128">https://blog.csdn.net/weixin_48927364/article/details/123604128</a></p>
 
     </div>
 
@@ -340,7 +342,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://itliming2000.github.io/2022/03/10/%E3%80%90Hexo%E3%80%91%E9%83%A8%E7%BD%B2%E5%8D%9A%E5%AE%A2%E5%88%B0Github%E5%A4%B1%E8%B4%A5%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" title="【Hexo】部署博客到Github失败的解决方案">http://itliming2000.github.io/2022/03/10/【Hexo】部署博客到Github失败的解决方案/</a>
+    <a href="http://itliming2000.github.io/2022/03/20/%E3%80%90Python%E3%80%91JupyterLab%E6%8A%A5%E9%94%99%EF%BC%9AServer%20Connection%20Error%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%EF%BC%9F/" title="【Python】JupyterLab报错：Server Connection Error如何解决？">http://itliming2000.github.io/2022/03/20/【Python】JupyterLab报错：Server Connection Error如何解决？/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -362,7 +364,8 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/Github/" rel="tag"><i class="fa fa-tag"># Github</i></a>
+              <a href="/tags/Anaconda/" rel="tag"><i class="fa fa-tag"># Anaconda</i></a>
+              <a href="/tags/Jupyter/" rel="tag"><i class="fa fa-tag"># Jupyter</i></a>
           </div>
 
         
@@ -371,13 +374,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2022/03/06/%E3%80%90Hexo%E3%80%91nexT%E4%B8%BB%E9%A2%98%E4%BD%BF%E7%94%A8%E6%94%BB%E7%95%A5%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94%E6%B7%BB%E5%8A%A0%E8%AF%84%E8%AE%BA%E5%8A%9F%E8%83%BD/" rel="prev" title="【Hexo】nexT主题使用攻略基础——添加评论功能">
-      <i class="fa fa-chevron-left"></i> 【Hexo】nexT主题使用攻略基础——添加评论功能
+    <a href="/2022/03/17/%E3%80%90MySQL%E3%80%91%E5%BF%98%E8%AE%B0%E4%BA%86root%E7%94%A8%E6%88%B7%E5%AF%86%E7%A0%81%E5%A6%82%E4%BD%95%E9%87%8D%E7%BD%AE/" rel="prev" title="【MySQL】忘记了root用户密码如何重置">
+      <i class="fa fa-chevron-left"></i> 【MySQL】忘记了root用户密码如何重置
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2022/03/17/%E3%80%90MySQL%E3%80%91%E5%BF%98%E8%AE%B0%E4%BA%86root%E7%94%A8%E6%88%B7%E5%AF%86%E7%A0%81%E5%A6%82%E4%BD%95%E9%87%8D%E7%BD%AE/" rel="next" title="【MySQL】忘记了root用户密码如何重置">
-      【MySQL】忘记了root用户密码如何重置 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -437,7 +437,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E9%94%99%E8%AF%AF%E8%AF%B4%E6%98%8E"><span class="nav-text">一、错误说明</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE"><span class="nav-text">二、修改配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E6%B7%BB%E5%8A%A0%E5%85%AC%E9%92%A5"><span class="nav-text">三、添加公钥</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-%E6%B5%8B%E8%AF%95%E8%BF%9E%E6%8E%A5"><span class="nav-text">3.1 测试连接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-%E6%B7%BB%E5%8A%A0%E5%85%AC%E9%92%A5"><span class="nav-text">3.2 添加公钥</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-%E9%87%8D%E6%96%B0%E9%83%A8%E7%BD%B2"><span class="nav-text">3.3 重新部署</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E6%8A%A5%E9%94%99%E6%83%85%E5%BD%A2"><span class="nav-text">一、报错情形</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E6%B7%B1%E5%B1%82%E5%8E%9F%E5%9B%A0"><span class="nav-text">二、深层原因</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="nav-text">三、解决方案</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-%E9%87%8D%E5%91%BD%E5%90%8D%E7%94%A8%E6%88%B7%E5%90%8D"><span class="nav-text">3.1 重命名用户名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-%E5%90%AF%E7%94%A8Administrator%E8%B4%A6%E6%88%B7"><span class="nav-text">3.2 启用Administrator账户</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-%E5%88%87%E6%8D%A2Administrator%E8%B4%A6%E6%88%B7"><span class="nav-text">3.3 切换Administrator账户</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-4-%E9%87%8D%E5%91%BD%E5%90%8D%E7%94%A8%E6%88%B7%E6%96%87%E4%BB%B6%E5%A4%B9"><span class="nav-text">3.4 重命名用户文件夹</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-5-%E4%BF%AE%E6%94%B9%E6%B3%A8%E5%86%8C%E8%A1%A8"><span class="nav-text">3.5 修改注册表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-6-%E4%BF%AE%E6%94%B9%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="nav-text">3.6 修改环境变量</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B0%8F%E7%BB%93"><span class="nav-text">小结</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
