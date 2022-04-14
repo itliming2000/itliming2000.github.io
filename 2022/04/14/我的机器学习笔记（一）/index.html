@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*进度条颜色*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*阴影颜色*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*上边框颜色*/
+        border-left-color: #1E92FB;    /*左边框颜色*/
+    }
+</style>
+
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+</script>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/liming32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/liming16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"itliming2000.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="我的机器学习笔记（一）一、概述；二、机器学习的类型；三、机器学习的常见应用；四、机器学习的工具；五、机器学习的开发应用。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="我的机器学习笔记（一）">
+<meta property="og:url" content="http://itliming2000.github.io/2022/04/14/%E6%88%91%E7%9A%84%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/index.html">
+<meta property="og:site_name" content="离明的世界">
+<meta property="og:description" content="我的机器学习笔记（一）一、概述；二、机器学习的类型；三、机器学习的常见应用；四、机器学习的工具；五、机器学习的开发应用。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/f7c065e893a24764aaf7d1ba026f48a7.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA56a75piOemg=,size_20,color_FFFFFF,t_70,g_se,x_16">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/b4fdd2f4170a45c98ac0638a128826ee.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA56a75piOemg=,size_15,color_FFFFFF,t_70,g_se,x_16">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/5a999b5caa99426f94f4861752c684e3.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA56a75piOemg=,size_20,color_FFFFFF,t_70,g_se,x_16">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/6977056bff1a416db2113f8f5ceb436d.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA56a75piOemg=,size_20,color_FFFFFF,t_70,g_se,x_16">
+<meta property="article:published_time" content="2022-04-14T13:30:15.000Z">
+<meta property="article:modified_time" content="2022-04-14T13:39:37.122Z">
+<meta property="article:author" content="离明">
+<meta property="article:tag" content="AI">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/f7c065e893a24764aaf7d1ba026f48a7.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA56a75piOemg=,size_20,color_FFFFFF,t_70,g_se,x_16">
+
+<link rel="canonical" href="http://itliming2000.github.io/2022/04/14/%E6%88%91%E7%9A%84%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>我的机器学习笔记（一） | 离明的世界</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="离明的世界" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">离明的世界</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">知人者智,自知者明.</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">10</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">6</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">10</span></a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/itliming2000" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://itliming2000.github.io/2022/04/14/%E6%88%91%E7%9A%84%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="离明">
+      <meta itemprop="description" content="在我们自己身上,克服这个时代">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="离明的世界">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          我的机器学习笔记（一）
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-04-14 21:30:15 / 修改时间：21:39:37" itemprop="dateCreated datePublished" datetime="2022-04-14T21:30:15+08:00">2022-04-14</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2022/04/14/%E6%88%91%E7%9A%84%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2022/04/14/%E6%88%91%E7%9A%84%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.6k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>我的机器学习笔记（一）<br>一、概述；二、机器学习的类型；三、机器学习的常见应用；四、机器学习的工具；五、机器学习的开发应用。<span id="more"></span></p>
+<h1 id="一、概述"><a href="#一、概述" class="headerlink" title="一、概述"></a>一、概述</h1><p><strong>三个概念：</strong></p>
+<ul>
+<li>人工智能（Artificial Intelligence, AI）<ul>
+<li>机器学习（Machine Learning, ML）<ul>
+<li>深度学习（Deep Learning, DL）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="1-1-人工智能-–-AI"><a href="#1-1-人工智能-–-AI" class="headerlink" title="1.1 人工智能 – AI"></a>1.1 人工智能 – AI</h2><p>描述一个模仿人脑认知功能的概念或系统，可以从经验中学习，可以通过使用知识来执行任务、推理和做出决策。</p>
+<p>包括：机器学习、自然语言处理、语音合成、计算机视觉、机器人学、传感器分析、优化和模拟。</p>
+<p>类型：专家系统、神经网络和模糊逻辑等。</p>
+<h2 id="1-2-机器学习-–-ML"><a href="#1-2-机器学习-–-ML" class="headerlink" title="1.2 机器学习 – ML"></a>1.2 机器学习 – ML</h2><p>人工智能技术的一个子集，它使计算机系统能够基于过往经验（及数据观察）学习，并改善其在特定任务中的行为。</p>
+<p>包括：支持向量机、决策树、贝叶斯学习、K - means聚类、关联规则学习、回归和神经网络等。</p>
+<h2 id="1-3-深度学习-–-DL"><a href="#1-3-深度学习-–-DL" class="headerlink" title="1.3 深度学习 – DL"></a>1.3 深度学习 – DL</h2><p>使用神经网络的机器学习的一个子集。人工神经网络是受人脑结构启发而设计出来的计算模型。特别流行！</p>
+<p>典型框架：深度神经网络（DNNs）、卷积神经网络（CNNs）、循环神经网络（RNNs）和生成对抗网络（GAN）等。</p>
+<p>使用任务：如对象识别、语音识别和翻译。</p>
+<h1 id="二、机器学习的类型"><a href="#二、机器学习的类型" class="headerlink" title="二、机器学习的类型"></a>二、机器学习的类型</h1><p><strong>三大类型：</strong></p>
+<ul>
+<li>监督学习</li>
+<li>无监督学习</li>
+<li>强化学习</li>
+</ul>
+<h2 id="2-1-监督学习"><a href="#2-1-监督学习" class="headerlink" title="2.1 监督学习"></a>2.1 监督学习</h2><p><strong>最常见的机器学习类型</strong></p>
+<p>首先有一个要预测的目标、值或类，模型将根据历史数据进行训练，并使用该训练结果来预测未来的收入。例如根据不同的输入（星期几、广告、促销）预测商家的收入。那么该模型是有监督的，因为<strong>它知道要学习什么</strong>。</p>
+<ol>
+<li><p><strong>监督学习的数据</strong></p>
+<ul>
+<li>数据被分成两部分，训练集和测试集。</li>
+<li>训练集用于训练模型，测试集用于评估模型的准确性。</li>
+</ul>
+</li>
+<li><p><strong>监督学习的流程</strong></p>
+</li>
+</ol>
+<p><img src="https://img-blog.csdnimg.cn/f7c065e893a24764aaf7d1ba026f48a7.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA56a75piOemg=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<ol start="3">
+<li><p><strong>监督学习的原则</strong></p>
+<ul>
+<li><p>第一，训练数据集包含输入数据（预测变量）和预测的值（可以是数字也可以不是）；</p>
+</li>
+<li><p>第二，该模型将使用训练数据来学习输入和输出之间的联系。</p>
+</li>
+<li><p>基本思想：训练数据可以泛化，并且模型可以以一定的准确性用于新数据。</p>
+</li>
+</ul>
+</li>
+<li><p><strong>监督学习的算法</strong></p>
+<ul>
+<li><p>线性和逻辑回归</p>
+</li>
+<li><p>支持向量机</p>
+</li>
+<li><p>朴素贝叶斯</p>
+</li>
+<li><p>神经网络</p>
+</li>
+<li><p>梯度提升</p>
+</li>
+<li><p>分类树</p>
+</li>
+<li><p>随机森林</p>
+</li>
+</ul>
+</li>
+<li><p><strong>监督学习的应用</strong></p>
+<ul>
+<li>通常用于图像识别、语音识别、预测和某种特定业务领域（目标、财务分析等）中的专家系统。</li>
+</ul>
+</li>
+</ol>
+<h2 id="2-2-无监督学习"><a href="#2-2-无监督学习" class="headerlink" title="2.2 无监督学习"></a>2.2 无监督学习</h2><p>如果是未标记的数据，冰箱要在这些数据中查找模式和组。例如跟还有客户订购的产品类型、购买产品的频率等要素进行聚类，无监督学习将自动区分不同的客户。</p>
+<ul>
+<li>无监督学习着重于发现数据本身的分布特点、数据中的结构</li>
+<li>不需要对数据进行标记</li>
+<li>可用于查找数据中的组、集群或识别数据中的异常</li>
+</ul>
+<p><strong>无监督学习的算法</strong></p>
+<ul>
+<li>聚类算法 – 试图区分和分离不同组中的观察结果<ul>
+<li>K - means</li>
+<li>层次聚类</li>
+<li>混合模型</li>
+</ul>
+</li>
+<li>降维算法 – （大部分是无监督的）比较少的维度找到数据的最佳表示<ul>
+<li>PCA</li>
+<li>ICA</li>
+<li>自动编码器</li>
+</ul>
+</li>
+<li>异常检测 – 用来发现数据中的异常值，即不遵循数据集的记录</li>
+</ul>
+<p><strong>无监督学习的应用</strong></p>
+<ul>
+<li>查找相似客户群</li>
+</ul>
+<h2 id="2-3-强化学习"><a href="#2-3-强化学习" class="headerlink" title="2.3 强化学习"></a>2.3 强化学习</h2><p>如果想达到一个目标，例如型找到指定规则下赢得某游戏的最佳策略，一旦指定了这些规则，强化学习将多次玩此游戏以找到最佳策略。</p>
+<ul>
+<li>寻找可以最大化奖励的最佳行动或决策</li>
+<li>寻找问题的最佳解决方案</li>
+<li>最优解取决于奖励函数</li>
+</ul>
+<p><strong>强化学习的流程</strong><br><img src="https://img-blog.csdnimg.cn/b4fdd2f4170a45c98ac0638a128826ee.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA56a75piOemg=,size_15,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>强化学习可用于优化不同类型的问题。可用于优化非线性函数或查找网络中的最短路径。</p>
+<p>强化学习是一种无须人工干预即可训练模型的方式，模型从环境中交互学习。当模型获得事件或对象时，它会尝试预测我们想要的结果。如果结果正确，那么模型就会获得奖励；如果结果错误，那么模型就会受到惩罚。</p>
+<h1 id="三、机器学习的常见应用"><a href="#三、机器学习的常见应用" class="headerlink" title="三、机器学习的常见应用"></a>三、机器学习的常见应用</h1><p><strong>七个方面</strong></p>
+<ul>
+<li>降维（Dimensionality Reduction, DR）</li>
+<li>自然语言处理（Natural Language Processing, NLP）</li>
+<li>计算机视觉（Computer Vision, CV）</li>
+<li>异常检测（Anomaly Detection）</li>
+<li>时间序列（Time Series）</li>
+<li>分析（Analysis）</li>
+<li>推荐系统（Recommender System）</li>
+</ul>
+<h2 id="3-1-降维-–-DR"><a href="#3-1-降维-–-DR" class="headerlink" title="3.1 降维 – DR"></a>3.1 降维 – DR</h2><ol>
+<li><p>内容</p>
+<ul>
+<li>减少数据维度</li>
+<li>保留最相关信息</li>
+</ul>
+</li>
+<li><p>应用</p>
+<ul>
+<li>图像和音频压缩</li>
+<li>机器学习模型创建过程中的特征工程</li>
+</ul>
+</li>
+</ol>
+<h2 id="3-2-自然语言处理-–-NLP"><a href="#3-2-自然语言处理-–-NLP" class="headerlink" title="3.2 自然语言处理 – NLP"></a>3.2 自然语言处理 – NLP</h2><p><strong>广泛的领域</strong>，渐渐成为一门独立的学科。</p>
+<ul>
+<li>应用<ul>
+<li>主题建模</li>
+<li>文本分类</li>
+<li>情感分析</li>
+<li>机器翻译</li>
+<li>自然语言生成</li>
+<li>语音识别</li>
+<li>文本到语音</li>
+<li>文本分析</li>
+<li>摘要</li>
+<li>实体识别</li>
+<li>关键词提取</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-3-计算机视觉-–-CV"><a href="#3-3-计算机视觉-–-CV" class="headerlink" title="3.3 计算机视觉 – CV"></a>3.3 计算机视觉 – CV</h2><ul>
+<li>应用<ul>
+<li>图像分类</li>
+<li>图像分割</li>
+<li>对象检测</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-4-异常检测-–-Anomaly-Detection"><a href="#3-4-异常检测-–-Anomaly-Detection" class="headerlink" title="3.4 异常检测 – Anomaly Detection"></a>3.4 异常检测 – Anomaly Detection</h2><ol>
+<li>目的<ul>
+<li>识别数据中意外的、非典型的东西，对不匹配预期模式或数据集中其他项目的项目、事件或观察值的识别。</li>
+</ul>
+</li>
+<li>分类<ul>
+<li>新颖性检测</li>
+<li>异常值检测</li>
+<li>欺诈检测等</li>
+</ul>
+</li>
+<li>应用<ul>
+<li>银行欺诈</li>
+<li>结构缺陷</li>
+<li>医疗问题</li>
+<li>文本错误 …</li>
+</ul>
+</li>
+<li>异常也被称为<ul>
+<li>离群值</li>
+<li>新奇</li>
+<li>噪声</li>
+<li>偏差</li>
+<li>例外</li>
+</ul>
+</li>
+</ol>
+<h2 id="3-5-时间序列-–-Time-Series"><a href="#3-5-时间序列-–-Time-Series" class="headerlink" title="3.5 时间序列 – Time Series"></a>3.5 时间序列 – Time Series</h2><ol>
+<li>定义<ul>
+<li>将同一统计指标的数值按其发生的时间先后顺序排列而成的数列。</li>
+</ul>
+</li>
+<li>举例<ul>
+<li>证券交易所价格</li>
+<li>天气数据</li>
+<li>物联网传感器数据</li>
+</ul>
+</li>
+<li>应用<ul>
+<li>我们可以根据已有的历史数据对未来进行预测，可以计算时间序列来预测可能的未来值。</li>
+</ul>
+</li>
+</ol>
+<h2 id="3-6-分析-–-Analysis"><a href="#3-6-分析-–-Analysis" class="headerlink" title="3.6 分析 – Analysis"></a>3.6 分析 – Analysis</h2><ol>
+<li>定义<ul>
+<li>探索数据性质和模式的经典领域。</li>
+</ul>
+</li>
+<li>包括<ul>
+<li>预测分析 — 预测未来或未见数据可能发生的事情</li>
+<li>当前状态分析 — 我们可以从当前数据获得哪些见解，而无须构建预测模型</li>
+<li>优化问题 — 如探索如何从以消耗最少资源从A点到B点</li>
+</ul>
+</li>
+</ol>
+<h2 id="3-7-推荐系统-–-Recommender-System"><a href="#3-7-推荐系统-–-Recommender-System" class="headerlink" title="3.7 推荐系统 – Recommender System"></a>3.7 推荐系统 – Recommender System</h2><ol>
+<li><p>内容</p>
+<ul>
+<li>解决信息过载问题，能够根据用户的兴趣和爱好将相关内容推荐给用户。</li>
+</ul>
+</li>
+<li><p>包含</p>
+<ul>
+<li>各种ML推荐技术，利用用户和内容项的已知数据，实现个性化服务。</li>
+</ul>
+</li>
+</ol>
+<h1 id="四、机器学习的工具"><a href="#四、机器学习的工具" class="headerlink" title="四、机器学习的工具"></a>四、机器学习的工具</h1><h2 id="4-1-Python特点"><a href="#4-1-Python特点" class="headerlink" title="4.1 Python特点"></a>4.1 Python特点</h2><ul>
+<li><p>方便调试的<strong>解释性语言</strong></p>
+</li>
+<li><p>跨平台作业</p>
+</li>
+<li><p>广泛的应用程序接口（大量的第三方程序库）</p>
+</li>
+</ul>
+<h2 id="4-2-Python工具举例"><a href="#4-2-Python工具举例" class="headerlink" title="4.2 Python工具举例"></a>4.2 Python工具举例</h2><ol>
+<li><p>机器学习框架<br> - Scikit - learn<br>    - PyTorch<br>       - TensorFlow<br>          - Keras</p>
+</li>
+<li><p>辅助框架<br> - Pandas</p>
+<ul>
+<li>Numpy</li>
+<li>Matplotlib<ul>
+<li>Seaborn</li>
+<li>OpenCV</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>编程语言</p>
+<ul>
+<li>Python<ul>
+<li>R<ul>
+<li>C++</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h1 id="五、机器学习的开发应用"><a href="#五、机器学习的开发应用" class="headerlink" title="五、机器学习的开发应用"></a>五、机器学习的开发应用</h1><ul>
+<li>机器学习应用路线图</li>
+<li>机器学习的开发流程</li>
+</ul>
+<h2 id="5-1-机器学习的开发流程"><a href="#5-1-机器学习的开发流程" class="headerlink" title="5.1 机器学习的开发流程"></a>5.1 机器学习的开发流程</h2><ul>
+<li>传统编程开发流程与机器学习开发流程的比较</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/5a999b5caa99426f94f4861752c684e3.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA56a75piOemg=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h2 id="5-2-机器学习的应用路线"><a href="#5-2-机器学习的应用路线" class="headerlink" title="5.2 机器学习的应用路线"></a>5.2 机器学习的应用路线</h2><ul>
+<li>机器学习的应用路线<ul>
+<li>数据预处理 — Preprocessing</li>
+<li>学习 — Learning</li>
+<li>评价 — Evaluation</li>
+<li>预测 — Presiction<br><img src="https://img-blog.csdnimg.cn/6977056bff1a416db2113f8f5ceb436d.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA56a75piOemg=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></li>
+</ul>
+</li>
+</ul>
+<p>CSDN同步参考链接：<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_48927364/article/details/124181634">https://blog.csdn.net/weixin_48927364/article/details/124181634</a></p>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div>坚持分享交流,您的支持将鼓励我继续创作!</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="离明 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.png" alt="离明 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>离明
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://itliming2000.github.io/2022/04/14/%E6%88%91%E7%9A%84%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/" title="我的机器学习笔记（一）">http://itliming2000.github.io/2022/04/14/我的机器学习笔记（一）/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <div>
+        
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+        
+      </div>
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/AI/" rel="tag"><i class="fa fa-tag"># AI</i></a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/03/20/%E3%80%90Python%E3%80%91JupyterLab%E6%8A%A5%E9%94%99%EF%BC%9AServer%20Connection%20Error%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%EF%BC%9F/" rel="prev" title="【Python】JupyterLab报错：Server Connection Error如何解决？">
+      <i class="fa fa-chevron-left"></i> 【Python】JupyterLab报错：Server Connection Error如何解决？
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E6%A6%82%E8%BF%B0"><span class="nav-text">一、概述</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD-%E2%80%93-AI"><span class="nav-text">1.1 人工智能 – AI</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E2%80%93-ML"><span class="nav-text">1.2 机器学习 – ML</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-%E2%80%93-DL"><span class="nav-text">1.3 深度学习 – DL</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9A%84%E7%B1%BB%E5%9E%8B"><span class="nav-text">二、机器学习的类型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0"><span class="nav-text">2.1 监督学习</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-%E6%97%A0%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0"><span class="nav-text">2.2 无监督学习</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0"><span class="nav-text">2.3 强化学习</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9A%84%E5%B8%B8%E8%A7%81%E5%BA%94%E7%94%A8"><span class="nav-text">三、机器学习的常见应用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-%E9%99%8D%E7%BB%B4-%E2%80%93-DR"><span class="nav-text">3.1 降维 – DR</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86-%E2%80%93-NLP"><span class="nav-text">3.2 自然语言处理 – NLP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89-%E2%80%93-CV"><span class="nav-text">3.3 计算机视觉 – CV</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-4-%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B-%E2%80%93-Anomaly-Detection"><span class="nav-text">3.4 异常检测 – Anomaly Detection</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-5-%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97-%E2%80%93-Time-Series"><span class="nav-text">3.5 时间序列 – Time Series</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-6-%E5%88%86%E6%9E%90-%E2%80%93-Analysis"><span class="nav-text">3.6 分析 – Analysis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-7-%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F-%E2%80%93-Recommender-System"><span class="nav-text">3.7 推荐系统 – Recommender System</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9A%84%E5%B7%A5%E5%85%B7"><span class="nav-text">四、机器学习的工具</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-Python%E7%89%B9%E7%82%B9"><span class="nav-text">4.1 Python特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-Python%E5%B7%A5%E5%85%B7%E4%B8%BE%E4%BE%8B"><span class="nav-text">4.2 Python工具举例</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9A%84%E5%BC%80%E5%8F%91%E5%BA%94%E7%94%A8"><span class="nav-text">五、机器学习的开发应用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#5-1-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9A%84%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B"><span class="nav-text">5.1 机器学习的开发流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-2-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9A%84%E5%BA%94%E7%94%A8%E8%B7%AF%E7%BA%BF"><span class="nav-text">5.2 机器学习的应用路线</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="离明"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">离明</p>
+  <div class="site-description" itemprop="description">在我们自己身上,克服这个时代</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/itliming2000" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;itliming2000" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:zhaohao0928@163.com" title="E-Mail → mailto:zhaohao0928@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/weixin_48927364" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;weixin_48927364" rel="noopener" target="_blank"><i class="fa fa-crosshairs fa-fw"></i>CSDN</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+      <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1808492017&auto=1&height=66"></iframe>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">离明</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">13k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">11 分钟</span>
+</div>
+
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+-->
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'cTJXzwL2bXk9OfeIUhtdbHlN-gzGzoHsz',
+      appKey     : 'qzyYQq4NTt2TU0Y3j7yAPCIT',
+      placeholder: "期待与您的交流！",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+
+
+
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+   <script type="text/javascript" src="/js/src/fireworks.js"></script>
+
+
+
+</body>
+</html>
